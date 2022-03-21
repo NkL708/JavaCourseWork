@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="outerPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LogInController">
+   <Button fx:id="signUpButton" layoutX="459.0" layoutY="32.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="109.0" styleClass="blueButton" text="Sign Up">
+      <font>
+         <Font name="Segoe UI" size="20.0" />
+      </font>
+   </Button>
+   <AnchorPane layoutX="159.0" layoutY="112.0" prefHeight="226.0" prefWidth="283.0" styleClass="innerPane">
+      <TextField fx:id="loginField" layoutX="34.0" layoutY="71.0" prefHeight="25.0" prefWidth="216.0" promptText="Login" styleClass="textField">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="passwordField" layoutX="34.0" layoutY="121.0" prefHeight="25.0" prefWidth="216.0" promptText="Password" styleClass="textField">
+         <font>
+            <Font name="Segoe UI" size="12.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="loginButton" layoutX="87.0" layoutY="168.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="109.0" styleClass="greenButton" text="Log in">
+         <font>
+            <Font name="Segoe UI" size="20.0" />
+         </font>
+      </Button>
+      <Text fx:id="notCorrectInfo" fill="RED" layoutX="69.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not right login or password" visible="false" />
+      <Text fx:id="registrationSucceed" fill="#00fc3b" layoutX="87.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration succeed" visible="false" />
+   </AnchorPane>
+</AnchorPane>

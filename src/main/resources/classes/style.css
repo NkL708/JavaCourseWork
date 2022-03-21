@@ -1,0 +1,42 @@
+.outerPane {
+    -fx-background-color: #2d2e33;
+}
+
+.innerPane {
+    -fx-background-color: #2b2b2c;
+    -fx-background: #2b2b2c;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+.textField {
+    -fx-background-color: #3d3c3c;
+    -fx-background-radius: 5;
+    -fx-focus-color: black;
+    -fx-text-fill: white;
+    -fx-faint-focus-color: transparent;
+}
+
+.greenButton {
+    -fx-background-color: #00cc00;
+    -fx-background-radius: 5;
+    -fx-text-fill: black;
+}
+
+.greenButton:hover {
+    -fx-background-color: #009900;
+}
+
+.blueLabel {
+    -fx-text-fill: #00ffff;
+}
+
+.blueButton {
+    -fx-background-color: #00ffff;
+    -fx-background-radius: 5;
+    -fx-text-fill: black;
+}
+
+.blueButton:hover {
+    -fx-background-color: #00cccc;
+}

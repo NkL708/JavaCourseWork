@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="outerPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.VoteController">
+   <ImageView fx:id="backToMenuButton" fitHeight="49.0" fitWidth="49.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../pictures/arrow.png" />
+   </ImageView>
+   <AnchorPane layoutX="95.0" layoutY="47.0" prefHeight="243.0" prefWidth="422.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+      <PieChart fx:id="pieChart" prefHeight="245.0" prefWidth="424.0" />
+   </AnchorPane>
+   <FlowPane fx:id="voteButtonsPane" hgap="20.0" layoutX="95.0" layoutY="292.0" prefHeight="87.0" prefWidth="424.0" vgap="20.0">
+      <padding>
+         <Insets top="10.0" />
+      </padding></FlowPane>
+</AnchorPane>
