@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="outerPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateController">
-   <children>
-      <ImageView fx:id="backToMenuButton" fitHeight="49.0" fitWidth="49.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pictures/arrow.png" />
-         </image></ImageView>
-   </children>
+<AnchorPane prefHeight="401.0" prefWidth="305.0" styleClass="outerPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CreateController">
+   <ImageView fx:id="backToMenuButton" fitHeight="49.0" fitWidth="49.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../pictures/arrow.png" />
+   </ImageView>
+   <TextField fx:id="titleField" layoutX="32.0" layoutY="89.0" promptText="Title" styleClass="textField" />
+    <ScrollPane hbarPolicy="NEVER" layoutX="32.0" layoutY="135.0" prefHeight="244.0" prefWidth="149.0" styleClass="innerPane">
+        <VBox fx:id="pointsPane" prefHeight="231.0" prefWidth="148.0" />
+    </ScrollPane>
+    <ImageView fx:id="addPointButton" fitHeight="58.0" fitWidth="59.0" layoutX="220.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../pictures/add.png" />
+    </ImageView>
+   <Button fx:id="createVote" layoutX="206.0" layoutY="354.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" styleClass="greenButton" text="Create" />
 </AnchorPane>

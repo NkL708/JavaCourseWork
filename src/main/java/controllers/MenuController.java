@@ -5,8 +5,6 @@ import classes.Main;
 import classes.Vote;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,34 +24,20 @@ public class MenuController
     @FXML
     private Button createVoteButton;
     @FXML
-    private GridPane gridPane;
+    private VBox votesPane;
     @FXML
     private ImageView backToMenuButton;
 
-    void createVotesGUI() throws SQLException, ClassNotFoundException
+    void createVotesGUI() throws SQLException
     {
         // Set grid size
         Vector<Vote> votes = Database.loadVotes();
-        while (gridPane.getRowCount() * gridPane.getColumnCount() < votes.size())
-        {
-            RowConstraints rowConstraints = new RowConstraints();
-            gridPane.getRowConstraints().add(0, rowConstraints);
-        }
-        int x = 0, y = 0;
-        // Не забудь проверить компоновку, когда много голосований
         for (Vote vote: votes)
         {
-            if (x == 3)
-            {
-                y += 2;
-            }
-            Label label = new Label(vote.getName());
+            Label label = new Label(vote.name());
             label.getStyleClass().add("blueLabel");
             Button button = new Button("Открыть");
-            GridPane.setHalignment(button, HPos.CENTER);
-            GridPane.setValignment(button, VPos.CENTER);
-            GridPane.setHalignment(label, HPos.CENTER);
-            GridPane.setValignment(label, VPos.CENTER);
+            button.setPrefSize(200,30);
             button.getStyleClass().add("blueButton");
             button.setOnAction(actionEvent ->
             {
@@ -63,7 +47,7 @@ public class MenuController
                     FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(Main.class.getResource("vote.fxml")));
                     Parent parent = loader.load();
                     VoteController voteController = loader.getController();
-                    voteController.setVoteName(vote.getName());
+                    voteController.setVoteName(vote.name());
                     voteController.createGUI();
                     stage.setScene(new Scene(parent));
                 }
@@ -72,14 +56,13 @@ public class MenuController
                    e.printStackTrace();
                 }
             });
-            gridPane.add(label, x, y);
-            gridPane.add(button, x, y + 1);
-            x++;
+            votesPane.getChildren().add(label);
+            votesPane.getChildren().add(button);
         }
     }
 
     @FXML
-    void initialize() throws SQLException, ClassNotFoundException
+    void initialize() throws SQLException
     {
         createVotesGUI();
         createVoteButton.setOnAction(actionEvent ->

@@ -39,25 +39,25 @@ public class VoteController
     public void createGUI() throws ClassNotFoundException, IOException, SQLException
     {
         updateVote();
-        for (int i = 0; i < vote.getPointsVotes().size(); i++)
+        for (int i = 0; i < vote.pointsVotes().size(); i++)
         {
-            String name = vote.getPointsNames().elementAt(i) + " : " + vote.getPointsVotes().elementAt(i);
-            PieChart.Data slice = new PieChart.Data(name, vote.getPointsVotes().elementAt(i));
+            String name = vote.pointsNames().elementAt(i) + " : " + vote.pointsVotes().elementAt(i);
+            PieChart.Data slice = new PieChart.Data(name, vote.pointsVotes().elementAt(i));
             pieChart.getData().add(slice);
-            Button button = new Button(vote.getPointsNames().elementAt(i));
+            Button button = new Button(vote.pointsNames().elementAt(i));
             button.getStyleClass().add("blueButton");
             voteButtonsPane.getChildren().add(button);
             // If user voted - disable buttons
-            if (vote.getVotedUsers().contains(user.getUsername()))
+            if (vote.votedUsers().contains(user.getUsername()))
             {
                 button.setDisable(true);
             }
-            int voteIndex = i + 1, userIndex = vote.getVotedUsers().size() + 1;
+            int voteIndex = i + 1, userIndex = vote.votedUsers().size() + 1;
             button.setOnAction(actionEvent ->
             {
                 try
                 {
-                    Database.vote(vote.getName(), user.getUsername(), voteIndex, userIndex);
+                    Database.vote(vote.name(), user.getUsername(), voteIndex, userIndex);
                     updateGUI();
                 }
                 catch (SQLException | ClassNotFoundException e)
@@ -81,14 +81,14 @@ public class VoteController
     public void updateGUI() throws SQLException
     {
         updateVote();
-        for (int i = 0; i < vote.getPointsVotes().size(); i++)
+        for (int i = 0; i < vote.pointsVotes().size(); i++)
         {
             // Update pie chart values
-            String name = vote.getPointsNames().elementAt(i) + " : " + vote.getPointsVotes().elementAt(i);
-            pieChart.getData().get(i).setPieValue(vote.getPointsVotes().elementAt(i));
+            String name = vote.pointsNames().elementAt(i) + " : " + vote.pointsVotes().elementAt(i);
+            pieChart.getData().get(i).setPieValue(vote.pointsVotes().elementAt(i));
             pieChart.getData().get(i).setName(name);
             // Update buttons
-            if (vote.getVotedUsers().contains(user.getUsername()))
+            if (vote.votedUsers().contains(user.getUsername()))
             {
                 voteButtonsPane.getChildren().get(i).setDisable(true);
             }

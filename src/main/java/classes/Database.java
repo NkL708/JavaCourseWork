@@ -1,5 +1,7 @@
 package classes;
 
+import javafx.scene.control.TextField;
+
 import java.sql.*;
 import java.util.Arrays;
 import java.util.Objects;
@@ -10,21 +12,19 @@ public class Database
     private final static String userName = "postgres";
     private final static String password = "hugelong123";
     private final static String connectionUrl = "jdbc:postgresql://localhost:5432/JavaCourse";
-
     static public void addUser(String username, String password) throws SQLException, ClassNotFoundException
     {
         try (Connection connection = DriverManager.getConnection(Database.connectionUrl, Database.userName, Database.password))
         {
             PreparedStatement preparedStatement = connection.prepareStatement("""
                             INSERT INTO users(username, password)
-                            VALUES(?,?);
+                            VALUES(?, ?);
                             """);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             preparedStatement.executeUpdate();
         }
     }
-
     static public boolean authUser(String username, String password) throws SQLException, ClassNotFoundException
     {
         try (Connection connection = DriverManager.getConnection(Database.connectionUrl, Database.userName, Database.password))
@@ -44,7 +44,6 @@ public class Database
             return false;
         }
     }
-
     static public boolean isUserUnique(String username) throws SQLException, ClassNotFoundException
     {
         try (Connection connection = DriverManager.getConnection(Database.connectionUrl, Database.userName, Database.password))
@@ -63,7 +62,6 @@ public class Database
             return true;
         }
     }
-
     static public Vector<Vote> loadVotes() throws SQLException
     {
         Vector<Vote> result = new Vector<>();
@@ -88,7 +86,6 @@ public class Database
         }
         return result;
     }
-
     // Unique user only!
     static public void vote(String voteName, String userName, int voteIndex, int userIndex) throws SQLException, ClassNotFoundException
     {
@@ -109,7 +106,6 @@ public class Database
             preparedStatement.executeUpdate();
         }
     }
-
     static public Vote getVote(String voteName) throws SQLException
     {
         try (Connection connection = DriverManager.getConnection(Database.connectionUrl, Database.userName, Database.password))
@@ -127,6 +123,43 @@ public class Database
             Vector<String> pointsNames = new Vector<>(Arrays.asList((String[])resultSet.getArray("points_names").getArray()));
             Vector<String> votedUsers = new Vector<>(Arrays.asList((String[])resultSet.getArray("voted_users").getArray()));
             return (new Vote(name, pointsVotes, pointsNames, votedUsers));
+        }
+    }
+    static public int getUserId(String userName) throws SQLException
+    {
+        try (Connection connection = DriverManager.getConnection(Database.connectionUrl, Database.userName, Database.password))
+        {
+            PreparedStatement preparedStatement = connection.prepareStatement("""
+                    SELECT id
+                    FROM users
+                    WHERE username = ?;
+                    """);
+            preparedStatement.setString(1, userName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("id");
+        }
+    }
+    static public void createVote(String voteName, Vector<Integer> pointsVotes, Vector<TextField> pointsNames, int creatorKey) throws SQLException
+    {
+        try (Connection connection = DriverManager.getConnection(Database.connectionUrl, Database.userName, Database.password))
+        {
+            PreparedStatement preparedStatement = connection.prepareStatement("""
+                    INSERT INTO votes_table(name, points_votes, points_names, creator, voted_users)
+                    VALUES(?, ?, ?, ?, ?);
+                    """);
+            Vector<String> names = new Vector<>();
+            for (TextField textfield : pointsNames)
+            {
+                names.add(textfield.getText());
+            }
+            preparedStatement.setString(1, voteName);
+            preparedStatement.setArray(2, connection.createArrayOf("INT", pointsVotes.toArray()));
+            preparedStatement.setArray(3, connection.createArrayOf("TEXT", names.toArray()));
+            preparedStatement.setInt(4, creatorKey);
+            preparedStatement.setArray(5, connection.createArrayOf("TEXT", new String[]{}));
+
+            preparedStatement.executeUpdate();
         }
     }
 }
